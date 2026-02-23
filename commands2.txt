@@ -1,0 +1,53 @@
+// Find Data
+db.yourcollectionname.find()  //to show all data, it shows first 20 results and then do iteration
+
+
+db.yourcollectionname.find().skip() //how many data you want to skip
+
+db.yourcollectionname.findOne()  //return only the very first document it find
+
+db.yourcollectionname.findOne({name:"given name"})  //to find specific one
+
+db.yourcollectionname.find().sort({name:1}) //1 A-Z   ||  -1 Z-A
+db.yourcollectionname.find().limit(n)  //limit value can be any number  returns first n document by id
+
+
+
+db.yourcollectionname.insertMany([
+    {name:"xyz", section:"abcde", email:"xyz@gmail.com", department:"IT", salary:100000 },
+    {name:"abc", section:"abcde", email:"abc@gmail.com", department:"IT", salary:140000},
+    {name:"pqr", section:"abcde", email:"pqr@gmail.com", department:"IT", salary:300000},
+    {name:"MNO", section:"abcde", email:"mno@gmail.com", department:"IT", salary:300000, address:{city:"gaya" ,post:"sahiya"}}
+])
+
+db.yourcollectionname.find({department:"IT"})
+
+db.yourcollectionname.find({department:"CSE", section:"abcd"}) // all conditions must satisfy
+
+
+db.yourcollectionname.find({department:"IT"}, {_id: 0,name:1, email:1, department:1}) //filter and projection
+db.yourcollectionname.find({department:"IT"}, {_id: 0,name:0, email:0, department:0}) //filter and projection //shows everything except the one we mentioned as 0
+
+
+// All fields should either be 1 or 0 but not mixed  except id
+db.yourcollectionname.find({department:"IT"}, {_id: 0,name:1, email:0, department:0}) //filter and projection //shows everything except the one we mentioned as 0
+// we can replace 1 with true and 0 with false as well
+
+db.yourcollectionname.find({'address.city':'gaya'}) 
+
+db.yourcollectionname.find().count()   //to count how many number of documents
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
