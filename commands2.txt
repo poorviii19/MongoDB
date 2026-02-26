@@ -37,8 +37,76 @@ db.yourcollectionname.find({'address.city':'gaya'})
 
 db.yourcollectionname.find().count()   //to count how many number of documents
 
+db.dropDatabse() //Deletes the current database
+
+db.yourcollectionname.drop()  // used to drop collection of current Database
 
 
+db.yourcollectionname.deleteOne({age:20})  //delete one document from collection in which age = 20
+db.yourcollectionname.deleteMany({age:20}) //delete all document from collection in which age = 20
+db.yourcollectionname.updateOne({title:"MongoDB"},{$set:{title:"MNDB"}}) //update a document in which title is as per mentioned 
+db.yourcollectionname.updateMany({title:"MongoDB"},{$set:{title:"MNDB"}}) //update all document in which title is as per mentioned 
+
+conditions:
+
+db.yourcollectionname.find({age:{$lt:25}})  //less than 25
+db.yourcollectionname.find({age:{$gt:25}})  //greater than 25
+db.yourcollectionname.find({age:{$lte:25}})  //less than and equals to 25
+db.yourcollectionname.find({age:{$gte:25}})  //greater than and equals 25
+db.yourcollectionname.find({age:{$ne:25}})  //not equals 25
+db.yourcollectionname.find({age:{$in:[25,24,18]}}).pretty()  //where age matches any of these age
+db.yourcollectionname.find({age:{$nin:[25,24,18]}}).pretty()  //where age not  matches any of these age
+
+
+AND OR:
+db.yourcollectionname.find({$and:[{name:"Vikas"},{place:"Mumbai"}]})
+db.yourcollectionname.find({$or:[{name:"Vikas"},{place:"Mumbai"}]})
+
+NOT:
+db.yourcollectionname.find({price:{$not:{$gt:1.99}}})
+
+Distinct: We use it when want to find list of products name as when we use .find() it gives all the data not specific
+db.yourcollectionname.distinct("Gender")
+
+
+Aggregation: An aggregation pipeline is a way to process data step by step. Each step does one specific task, like filtering, grouping, sorting,
+or transforming documents. Use it when you need to summarise data, generate reports, or reshape documents , all directly inside MOngoDB, without 
+writing extra logic in your application
+
+
+db.orders.aggregate([
+    {$match: {cust_id:1}},
+    {$group: {_id: '$cust_id', total: {$sum: '$amount'}}}
+])
+
+ db.cities.aggregate([{$match: {"continent":"North America"}}, {$sort: {"population": 1}}] )
+
+
+db.cities.aggregate([
+    {
+        $group:{
+            "_id":{
+                "contient":"$continent",
+                "country":"$country"
+            },
+            "highest_population":{$max:"population"},
+            "first_city":{$first:"$name"},
+            "cities_in_top20":{$sum:1}
+        }
+    }
+])
+
+
+Capped Collection: 
+fixed size collection that supports high throghput operations that insert and retrieve
+documents based on insertion order
+once a collection fill its allocated space, it makes room for new documents by overwriting the oldest
+documnets in the collection
+
+db.createCollection("cap_col",{capped:true, size: 10000, max:2})
+db.cap_col.insertOne({_id:1, name:"akash",age:22})
+db.cap_col.insertOne({_id:2, name:"akash",age:22})
+db.cap_col.insertOne({_id:3, name:"akash",age:22})  //first one will be removed and this will be added as max value is set to 2
 
 
 
