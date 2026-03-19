@@ -37,7 +37,7 @@ db.yourcollectionname.find({'address.city':'gaya'})
 
 db.yourcollectionname.find().count()   //to count how many number of documents
 
-db.dropDatabse() //Deletes the current database
+db.dropDatabase() //Deletes the current database
 
 db.yourcollectionname.drop()  // used to drop collection of current Database
 
@@ -76,7 +76,7 @@ writing extra logic in your application
 
 db.orders.aggregate([
     {$match: {cust_id:1}},
-    {$group: {_id: '$cust_id', total: {$sum: '$amount'}}}
+    {$group: {_id: '$cust_id', total: {$sum: '$amount'}}}  //is is must
 ])
 
  db.cities.aggregate([{$match: {"continent":"North America"}}, {$sort: {"population": 1}}] )
