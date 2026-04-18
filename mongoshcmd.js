@@ -5,10 +5,10 @@ mongosh -version
  mongosh
 
 // To check database:
-show dbs
+// show dbs
 
 // To create and work in new Database:
-use yourdatabasename
+// use yourdatabasename
 
 // To create collection:
 
@@ -17,7 +17,7 @@ db.createCollection("yourcollectionname")
 
 
 // To display collection
-show collections
+// show collections
 
 // To rename collection name
 db.yourcollectionname.renameCollection("newname")

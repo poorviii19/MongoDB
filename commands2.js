@@ -58,20 +58,21 @@ db.yourcollectionname.find({age:{$in:[25,24,18]}}).pretty()  //where age matches
 db.yourcollectionname.find({age:{$nin:[25,24,18]}}).pretty()  //where age not  matches any of these age
 
 
-AND OR:
+// AND OR:
 db.yourcollectionname.find({$and:[{name:"Vikas"},{place:"Mumbai"}]})
 db.yourcollectionname.find({$or:[{name:"Vikas"},{place:"Mumbai"}]})
 
-NOT:
+// NOT:
 db.yourcollectionname.find({price:{$not:{$gt:1.99}}})
 
-Distinct: We use it when want to find list of products name as when we use .find() it gives all the data not specific
+
+// Distinct: We use it when want to find list of products name as when we use .find() it gives all the data not specific
 db.yourcollectionname.distinct("Gender")
 
 
-Aggregation: An aggregation pipeline is a way to process data step by step. Each step does one specific task, like filtering, grouping, sorting,
-or transforming documents. Use it when you need to summarise data, generate reports, or reshape documents , all directly inside MOngoDB, without 
-writing extra logic in your application
+// Aggregation: An aggregation pipeline is a way to process data step by step. Each step does one specific task, like filtering, grouping, sorting,
+// or transforming documents. Use it when you need to summarise data, generate reports, or reshape documents , all directly inside MOngoDB, without 
+// writing extra logic in your application
 
 
 db.orders.aggregate([
@@ -97,11 +98,11 @@ db.cities.aggregate([
 ])
 
 
-Capped Collection: 
-fixed size collection that supports high throghput operations that insert and retrieve
-documents based on insertion order
-once a collection fill its allocated space, it makes room for new documents by overwriting the oldest
-documnets in the collection
+// Capped Collection: 
+// fixed size collection that supports high throghput operations that insert and retrieve
+// documents based on insertion order
+// once a collection fill its allocated space, it makes room for new documents by overwriting the oldest
+// documnets in the collection
 
 db.createCollection("cap_col",{capped:true, size: 10000, max:2})
 db.cap_col.insertOne({_id:1, name:"akash",age:22})
